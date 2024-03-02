@@ -15,7 +15,7 @@ export const searchSlice = createSlice({
     name: "search",
     initialState,
     reducers: {
-        setSearchValue: (state, action: PayloadAction<string>) => {
+        setSearchValue: (state: SearchState, action: PayloadAction<string>) => {
             state.searchValue = action.payload;
         },
     }
