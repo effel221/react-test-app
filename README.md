@@ -15,7 +15,7 @@ yarn install
 ### Run project in development mode
 then to run server:
 ```sh
-node run dev
+npm run dev
 ```
 or
 ```sh
