@@ -3,14 +3,16 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 
+
 // import styles
 import styles from "./LeftNav.module.scss";
 
 
 export default function LeftNav(): React.JSX.Element {
   const pathname = usePathname()
-  const renderClassState = (path: string) => {
-      return pathname !== path ? styles.leftNavBlockLink : styles.leftNavBlockLinkActive;
+  const renderClassState = (path: string): string => {
+      const defaultLine = styles.leftNavBlockLink
+      return pathname === path ? defaultLine + ' ' + styles.leftNavBlockLinkActive : defaultLine;
   }
   return (
       <aside className={styles.leftNavBlock}>
