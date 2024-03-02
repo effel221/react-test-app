@@ -1,0 +1,18 @@
+@import 'styles/global-settings';
+
+.mainBlock {
+  display: flex;
+
+  @include for-phone-only {
+    flex-direction: column;
+  }
+}
+
+.mainBlockContainer {
+  display: flex;
+  padding: 40px 20px;
+
+  @include for-phone-only {
+    padding: 20px;
+  }
+}

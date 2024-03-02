@@ -1,0 +1,56 @@
+@import 'styles/global-settings';
+
+.headerBlock {
+  display: flex;
+  background: $primary-color;
+}
+
+.logoBlock {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  margin: 20px 0 0 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.headerInfo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerInfoContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-width: 60%;
+
+  h1 {
+    text-align: center;
+    color: $primary-red;
+    margin: 20px 0 0;
+    font-size: 40px;
+
+    @include for-phone-only {
+      font-size: 20px;
+    }
+  }
+
+  h3 {
+    border-top: 1px solid $primary-dark-blue;
+    color: $primary-dark-blue;
+    font-weight: 100;
+    text-transform: uppercase;
+    padding: 10px 0 0;
+
+    @include for-phone-only {
+      font-size: 16px;
+    }
+  }
+}

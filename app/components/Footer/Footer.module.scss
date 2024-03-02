@@ -1,0 +1,15 @@
+@import 'styles/global-settings';
+
+.footerBlock {
+  display: flex;
+  height: 50px;
+  background: $primary-dark-blue;
+  color: white;
+  align-items: center;
+
+  p {
+    font-size: 14px;
+    padding: 0 0 0 20px;
+  }
+}
+
