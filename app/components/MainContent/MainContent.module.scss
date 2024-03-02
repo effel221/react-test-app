@@ -10,9 +10,20 @@
 
 .mainBlockContainer {
   display: flex;
+  flex: 1 1;
   padding: 40px 20px;
 
   @include for-phone-only {
     padding: 20px;
+  }
+}
+
+.mainPageBlock {
+  flex: 1 1;
+  max-width: 933px;
+
+  h3 {
+    color: $primary-green;
+    margin: 0 0 20px;
   }
 }

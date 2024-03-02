@@ -8,7 +8,11 @@ export default function MainContent({children}: React.ReactNode): React.JSX.Elem
   return (
       <section className={styles.mainBlock}>
           <LeftNav/>
-          <div className={styles.mainBlockContainer}>{children}</div>
+          <div className={styles.mainBlockContainer}>
+              <section className={styles.mainPageBlock}>
+                  {children}
+              </section>
+          </div>
       </section>
   );
 }

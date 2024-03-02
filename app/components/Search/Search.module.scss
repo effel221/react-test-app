@@ -1,0 +1,29 @@
+@import 'styles/global-settings';
+
+.searchBlock {
+  display: flex;
+  height: 50px;
+
+  @include for-phone-only {
+    justify-content: center;
+    width: 100%;
+  }
+
+  @include for-tablet-portrait-up {
+    width: 77%;
+  }
+
+  @include for-desktop-up {
+    width: 93%;
+  }
+}
+
+.searchBlockInput {
+  width: 100%;
+  padding: 0 0 0 10px;
+}
+
+.searchBlockButton {
+  width: 120px;
+  cursor: pointer;
+}

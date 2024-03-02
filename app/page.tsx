@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 
 export default function Page(): React.JSX.Element {
   return (
-      <section className={styles.mainPageBlock}>
+      <>
           <h3>Web sites are made of lots of things — frameworks, libraries, assets, and utilities.
               Bower manages all these things for you.</h3>
           <p>Keeping track of all these packages and making sure they are up to date
@@ -21,7 +21,7 @@ export default function Page(): React.JSX.Element {
           <p>Bower is optimized for the front-end. If multiple packages depend on a package -
               jQuery for example - Bower will download jQuery just once. This is known as a flat
               dependency graph and it helps reduce page load.</p>
-      </section>
+      </>
   )
 }
 

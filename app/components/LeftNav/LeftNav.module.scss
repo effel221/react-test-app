@@ -11,7 +11,7 @@
   }
 
   @include for-tablet-portrait-up {
-    width: 400px;
+    width: 25%;
   }
 
   @include for-desktop-up {
@@ -72,5 +72,5 @@
 
 .leftNavBlockLinkActive {
   font-weight: bold;
-  color: $primary-blue;
+  color: $primary-green;
 }
