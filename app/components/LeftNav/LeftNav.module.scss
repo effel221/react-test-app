@@ -10,10 +10,6 @@
     width: 100%;
   }
 
-  @include for-tablet-portrait-up {
-    width: 25%;
-  }
-
   @include for-desktop-up {
     width: 24%;
   }

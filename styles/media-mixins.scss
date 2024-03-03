@@ -1,10 +1,10 @@
 // reusable mixins for responsive
 
 @mixin for-phone-only {
-  @media (max-width: 599px) { @content; }
+  @media (max-width: 699px) { @content; }
 }
 @mixin for-tablet-portrait-up {
-  @media (min-width: 600px) { @content; }
+  @media (min-width: 700px) { @content; }
 }
 @mixin for-tablet-landscape-up {
   @media (min-width: 900px) { @content; }
