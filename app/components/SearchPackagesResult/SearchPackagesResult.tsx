@@ -1,6 +1,6 @@
 "use client"
 //import  components
-import React, {memo} from "react";
+import React, {memo, useState} from "react";
 import SearchCard, {SearchCardType} from "../BaseComponents/SearchCard/SearchCard";
 
 // import styles
@@ -11,19 +11,22 @@ import {getSearchValue} from "../../stores/searchStore";
 import {useSelector} from "react-redux";
 import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
+import LoadingData from "../BaseComponents/LoadingData/LoadingData";
 
 
 
 export default memo(function SearchPackagesResult(): React.JSX.Element {
+  const [ isLoading, setIsLoading ] = useState<boolean>(false)
   const currentValue: string = useSelector(getSearchValue)
   const debouncedValue: string = useDebounce(currentValue, 500);
-  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue)
+  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue, setIsLoading)
   return (
       <div className={styles.searchPackagesResultBlock}>
-          {packagesData?.length > 0 && packagesData.map((card:SearchCardType , ind: number)=>{
+          {!isLoading && packagesData?.length > 0 && packagesData.map((card:SearchCardType , ind: number)=>{
               return <SearchCard key={ind} card={card}/>
           })}
-          {packagesData?.length === 0 && <p>No data</p>}
+          {!isLoading && packagesData?.length === 0 && <p>No data</p>}
+          {isLoading && <LoadingData/>}
       </div>
   );
 })
