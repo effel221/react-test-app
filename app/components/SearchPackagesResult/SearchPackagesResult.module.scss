@@ -2,5 +2,16 @@
 
 .searchPackagesResultBlock {
   display: flex;
+  flex-direction: column;
+}
+
+.searchPackagesResultBlockCards {
+  display: flex;
   flex-wrap: wrap;
+}
+
+.searchPackagesResultBlockSorting {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
 }

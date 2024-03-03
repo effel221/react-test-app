@@ -1,6 +1,6 @@
 "use client"
 //import  components
-import React, {memo, useState} from "react";
+import React, {memo, useCallback, useState} from "react";
 import SearchCard, {SearchCardType} from "../BaseComponents/SearchCard/SearchCard";
 
 // import styles
@@ -16,18 +16,39 @@ import LoadingData from "../BaseComponents/LoadingData/LoadingData";
 
 
 export default memo(function SearchPackagesResult(): React.JSX.Element {
-  const [ isLoading, setIsLoading ] = useState<boolean>(false)
-  const currentValue: string = useSelector(getSearchValue)
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  const [ isSortedByStars, setIsSortedByStars ] = useState<boolean>(false);
+  const currentValue: string = useSelector(getSearchValue);
   const debouncedValue: string = useDebounce(currentValue, 500);
-  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue, setIsLoading)
+  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue, setIsLoading, isSortedByStars);
+
+  const handleCheckboxChange = useCallback(() => {
+    setIsSortedByStars(!isSortedByStars);
+  }, [isSortedByStars, debouncedValue]);
 
   return (
       <div className={styles.searchPackagesResultBlock}>
-          {!isLoading && packagesData.length > 0 && packagesData.map((card:SearchCardType , ind: number)=>{
+              <span className={styles.searchPackagesResultBlockSorting}>
+              <label htmlFor="sortingByStars">
+                <input
+                    id={"sortingByStars"}
+                    type="checkbox"
+                    checked={isSortedByStars}
+                    onChange={handleCheckboxChange}
+                />
+                Sort: Stars
+              </label>
+            </span>
+        {!isLoading && packagesData.length > 0 && <>
+          <div className={styles.searchPackagesResultBlockCards}>
+            {packagesData.map((card:SearchCardType , ind: number)=>{
               return <SearchCard key={ind} card={card}/>
-          })}
-          {!isLoading && packagesData.length === 0 && <p>No data</p>}
-          {isLoading && <LoadingData/>}
+            })}
+          </div>
+        </>
+        }
+        {!isLoading && packagesData.length === 0 && <p>No data</p>}
+        {isLoading && <LoadingData/>}
       </div>
   );
 })
