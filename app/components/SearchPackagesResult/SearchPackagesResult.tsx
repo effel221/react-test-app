@@ -12,15 +12,25 @@ import {useSelector} from "react-redux";
 import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
 import LoadingData from "../BaseComponents/LoadingData/LoadingData";
+import Pagination from "../BaseComponents/Pagination/Pagination";
 
-
+export type SearchCardTypeAll = {
+    packages: [SearchCardType],
+    totalPagesAll: number
+}
 
 export default memo(function SearchPackagesResult(): React.JSX.Element {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ isSortedByStars, setIsSortedByStars ] = useState<boolean>(false);
+  const [ pageNumber, setPageNumber ] = useState<number>(1);
   const currentValue: string = useSelector(getSearchValue);
   const debouncedValue: string = useDebounce(currentValue, 500);
-  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue, setIsLoading, isSortedByStars);
+  const packagesDataAll: SearchCardTypeAll = usePackageSearch(debouncedValue,
+      setIsLoading, isSortedByStars, pageNumber);
+  const packagesData: [SearchCardType] = packagesDataAll['packages'];
+  const totalPagesAll: number = packagesDataAll['totalPagesAll'];
+  const paginationLength = totalPagesAll/5
+    console.log(totalPagesAll)
 
   const handleCheckboxChange = useCallback(() => {
     setIsSortedByStars(!isSortedByStars);
@@ -28,23 +38,24 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
 
   return (
       <div className={styles.searchPackagesResultBlock}>
-              <span className={styles.searchPackagesResultBlockSorting}>
-              <label htmlFor="sortingByStars">
-                <input
-                    id={"sortingByStars"}
-                    type="checkbox"
-                    checked={isSortedByStars}
-                    onChange={handleCheckboxChange}
-                />
-                Sort: Stars
-              </label>
-            </span>
+        <span className={styles.searchPackagesResultBlockSorting}>
+          <label htmlFor="sortingByStars">
+            <input
+                id={"sortingByStars"}
+                type="checkbox"
+                checked={isSortedByStars}
+                onChange={handleCheckboxChange}
+            />
+            Sort: Stars
+          </label>
+        </span>
         {!isLoading && packagesData.length > 0 && <>
           <div className={styles.searchPackagesResultBlockCards}>
             {packagesData.map((card:SearchCardType , ind: number)=>{
               return <SearchCard key={ind} card={card}/>
             })}
           </div>
+          <Pagination paginationLength={paginationLength} setPageNumber={setPageNumber}/>
         </>
         }
         {!isLoading && packagesData.length === 0 && <p>No data</p>}

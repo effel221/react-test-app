@@ -1,0 +1,10 @@
+@import 'styles/global-settings';
+
+.paginationBlock {
+  display: flex;
+  flex-wrap: wrap;
+
+  span {
+    padding: 5px;
+  }
+}
