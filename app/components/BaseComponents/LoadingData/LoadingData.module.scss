@@ -9,7 +9,9 @@
 
 .loadingDataBlockLoading {
   display: flex;
-  border: 16px solid #B2BEB5;
+  border-left: 16px solid #B2BEB5;
+  border-right: 16px solid #B2BEB5;
+  border-bottom: 16px solid #B2BEB5;
   border-top: 16px solid $primary-blue;
   border-radius: 50%;
   width: 120px;

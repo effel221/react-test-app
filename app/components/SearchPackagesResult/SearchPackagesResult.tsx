@@ -1,6 +1,7 @@
 "use client"
 //import  components
-import React, {memo, useCallback, useEffect, useState} from "react";
+import React, {memo} from "react";
+import SearchCard from "../BaseComponents/SearchCard/SearchCard";
 
 // import styles
 import styles from "./SearchPackagesResult.module.scss";
@@ -19,12 +20,8 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
   const packagesData = usePackageSearch(debouncedValue)
   return (
       <div className={styles.searchPackagesResultBlock}>
-          {packagesData?.length > 0 && packagesData.map(({name, description, rank, stars})=>{
-              return (<div className={styles.searchPackagesResultBlockCard}>
-                  {name}
-                  <p>{description}</p>
-                  {rank} {stars}
-              </div>)
+          {packagesData?.length > 0 && packagesData.map((card, ind)=>{
+              return <SearchCard key={ind} card={card}/>
           })}
           {packagesData?.length === 0 && <p>No data</p>}
       </div>
