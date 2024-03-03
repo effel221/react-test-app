@@ -1,6 +1,13 @@
 @import 'styles/global-settings';
 
 .loadingDataBlock {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingDataBlockLoading {
   display: flex;
   border: 16px solid #B2BEB5;
   border-top: 16px solid $primary-blue;

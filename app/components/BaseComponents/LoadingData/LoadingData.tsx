@@ -7,6 +7,8 @@ import styles from "./LoadingData.module.scss";
 
 export default function LoadingData(): React.JSX.Element {
   return (
-    <div className={styles.loadingDataBlock}/>
+      <div className={styles.loadingDataBlock}>
+        <div className={styles.loadingDataBlockLoading}/>
+      </div>
   );
 }

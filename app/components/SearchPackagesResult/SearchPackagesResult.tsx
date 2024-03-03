@@ -19,13 +19,14 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
   const packagesData = usePackageSearch(debouncedValue)
   return (
       <div className={styles.searchPackagesResultBlock}>
-          {packagesData?.length && packagesData.map(({name, description, rank, stars})=>{
+          {packagesData?.length > 0 && packagesData.map(({name, description, rank, stars})=>{
               return (<div className={styles.searchPackagesResultBlockCard}>
                   {name}
                   <p>{description}</p>
                   {rank} {stars}
               </div>)
           })}
+          {packagesData?.length === 0 && <p>No data</p>}
       </div>
   );
 })
