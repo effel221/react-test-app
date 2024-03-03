@@ -20,7 +20,19 @@
 
 .mainPageBlock {
   flex: 1 1;
-  max-width: 933px;
+  max-width: 833px;
+
+  @include for-phone-only {
+    max-width: 100%;
+  }
+
+  @include for-tablet-portrait-up {
+    max-width: 100%;
+  }
+
+  @include for-desktop-up {
+    max-width: 833px;
+  }
 
   h3 {
     color: $primary-green;
