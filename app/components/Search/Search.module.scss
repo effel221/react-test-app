@@ -3,6 +3,7 @@
 .searchBlock {
   display: flex;
   height: 50px;
+  margin: 0 0 40px;
 
   @include for-phone-only {
     justify-content: center;
@@ -21,9 +22,4 @@
 .searchBlockInput {
   width: 100%;
   padding: 0 0 0 10px;
-}
-
-.searchBlockButton {
-  width: 120px;
-  cursor: pointer;
 }

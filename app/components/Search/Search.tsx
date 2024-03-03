@@ -21,10 +21,8 @@ export default function Search(): React.JSX.Element {
           <input ref={inputRef} type="search"
             className={styles.searchBlockInput}
             placeholder={'Search packages...'}
-                 onChange={changeSearchValue}
+            onChange={changeSearchValue}
           />
-          <button className={styles.searchBlockButton}
-            onClick={changeSearchValue}>Search</button>
       </div>
   );
 }
