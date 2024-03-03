@@ -20,12 +20,13 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
   const currentValue: string = useSelector(getSearchValue)
   const debouncedValue: string = useDebounce(currentValue, 500);
   const packagesData: [SearchCardType] = usePackageSearch(debouncedValue, setIsLoading)
+
   return (
       <div className={styles.searchPackagesResultBlock}>
-          {!isLoading && packagesData?.length > 0 && packagesData.map((card:SearchCardType , ind: number)=>{
+          {!isLoading && packagesData.length > 0 && packagesData.map((card:SearchCardType , ind: number)=>{
               return <SearchCard key={ind} card={card}/>
           })}
-          {!isLoading && packagesData?.length === 0 && <p>No data</p>}
+          {!isLoading && packagesData.length === 0 && <p>No data</p>}
           {isLoading && <LoadingData/>}
       </div>
   );

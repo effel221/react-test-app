@@ -16,10 +16,17 @@ const getPackages = async (value: string, setIsLoading: (boolean)=>void) => {
 }
 
 export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void): [SearchCardType] => {
-    const [ packages, setPackages ] = useState<[SearchCardType]>([])
+    const [packages, setPackages] = useState<[SearchCardType]>([])
+    const [isResultLoaded, setIsResultLoaded ] = useState<boolean>(false)
     useEffect(()=> {
-     value.length && getPackages(value, setIsLoading).then(setPackages)
+     setIsResultLoaded(false)
+     value.length && getPackages(value, setIsLoading).then(() => setIsResultLoaded(true))
      !value.length && setPackages([])
     }, [value]);
+
+    useEffect(()=> {
+        isResultLoaded && setPackages(searchCache[value] || [])
+    }, [isResultLoaded, value]);
+
     return packages;
 };
