@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useState } from "react";
+import {SearchCardType} from "../components/BaseComponents/SearchCard/SearchCard";
 
 const url = 'https://libraries.io/api/search'
 const githubKey = 'adea9f496220f5bf0a57a2fc91bfe40b'
@@ -12,8 +13,8 @@ const getPackages = async (value: string) => {
     return searchCache[value];
 }
 
-export const usePackageSearch = (value) => {
-    const [ packages, setPackages ] = useState([])
+export const usePackageSearch = (value: string): [SearchCardType] => {
+    const [ packages, setPackages ] = useState<[SearchCardType]>([])
     useEffect(()=> {
      value.length && getPackages(value).then(setPackages)
      !value.length && setPackages([])
