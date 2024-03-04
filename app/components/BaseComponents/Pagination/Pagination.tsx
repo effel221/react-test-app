@@ -23,6 +23,7 @@ export default function Pagination({pageNumber, paginationLength, setPageNumber}
   return (
       <div className={styles.paginationBlock}>
           <ReactPaginate
+              forcePage={--pageNumber}
               breakLabel="..."
               nextLabel="next >"
               onPageChange={handlePageClick}

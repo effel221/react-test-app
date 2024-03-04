@@ -7,12 +7,18 @@ const githubKey = 'adea9f496220f5bf0a57a2fc91bfe40b'
 const searchCache = {};
 let totalPagesAll = 100;
 
-export const getPackages = async (value: string, sort: string, page: number) => {
+export const getPackages = async (value: string, sort: string, page: number, setPageNumber: (T) => void) => {
     try {
+        let response = null
         const mainUrl = `${url}?q=${value}`;
         const sortParam = `&sort=${sort}`;
         const pageParam = `&page=${page}&per_page=5`;
-        const response = await fetch(`${mainUrl}${sortParam}${pageParam}&api_key=${githubKey}`)
+        response = await fetch(`${mainUrl}${sortParam}${pageParam}&api_key=${githubKey}`)
+        if (response.status === 404) {
+            const newPageParam = `&page=1&per_page=5`;
+            response = await fetch(`${mainUrl}${sortParam}${newPageParam}&api_key=${githubKey}`)
+            setPageNumber(1)
+        }
         const totalPages = Number(response.headers.get('total'));
         totalPagesAll = totalPages;
         const packagesData = await response.json();
@@ -23,7 +29,7 @@ export const getPackages = async (value: string, sort: string, page: number) => 
 }
 
 export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
-    isSortedByStars: boolean, page: number): SearchCardTypeAll => {
+    isSortedByStars: boolean, page: number, setPageNumber: (T) => void ): SearchCardTypeAll => {
     const [packages, setPackages] = useState<[SearchCardType]>([]);
     const [isResultLoaded, setIsResultLoaded ] = useState<boolean>(false);
     useEffect(()=> {
@@ -36,7 +42,7 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
           setIsLoading(false)
       } else {
           setIsLoading(true)
-          getPackages(value, sort, page).then(() => setIsResultLoaded(true))
+          getPackages(value, sort, page, setPageNumber).then(() => setIsResultLoaded(true))
       }
     }, [value, isResultLoaded, isSortedByStars, page]);
 

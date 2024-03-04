@@ -26,7 +26,7 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
   const currentValue: string = useSelector(getSearchValue);
   const debouncedValue: string = useDebounce(currentValue, 500);
   const packagesDataAll: SearchCardTypeAll = usePackageSearch(debouncedValue,
-      setIsLoading, isSortedByStars, pageNumber);
+      setIsLoading, isSortedByStars, pageNumber, setPageNumber);
   const packagesData: [SearchCardType] = packagesDataAll['packages'];
   const totalPagesAll: number = packagesDataAll['totalPagesAll'];
   const paginationLength = totalPagesAll/5
