@@ -5,7 +5,7 @@ import {SearchCardTypeAll} from "../components/SearchPackagesResult/SearchPackag
 const url = 'https://libraries.io/api/search'
 const githubKey = 'adea9f496220f5bf0a57a2fc91bfe40b'
 const searchCache = {};
-let totalPagesAll = 100
+let totalPagesAll = 100;
 
 export const getPackages = async (value: string, sort: string, page: number) => {
     try {
@@ -16,7 +16,7 @@ export const getPackages = async (value: string, sort: string, page: number) => 
         const totalPages = Number(response.headers.get('total'));
         totalPagesAll = totalPages;
         const packagesData = await response.json();
-        searchCache[`${value}-${sort}`] = packagesData;
+        searchCache[`${value}-${sort}-${page}`] = packagesData;
     } catch (error: Error) {
         console.error(error);
     }
@@ -26,12 +26,11 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
     isSortedByStars: boolean, page: number): SearchCardTypeAll => {
     const [packages, setPackages] = useState<[SearchCardType]>([]);
     const [isResultLoaded, setIsResultLoaded ] = useState<boolean>(false);
-
     useEffect(()=> {
       setIsResultLoaded(false)
       if (!value.length) return setPackages([])
       const sort = isSortedByStars ? 'stars' : '';
-      const cacheKey = `${value}-${sort}`;
+      const cacheKey = `${value}-${sort}-${page}`;
       if (searchCache[cacheKey]) {
           setPackages(searchCache[cacheKey] || []);
           setIsLoading(false)
@@ -39,7 +38,7 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
           setIsLoading(true)
           getPackages(value, sort, page).then(() => setIsResultLoaded(true))
       }
-    }, [value, isResultLoaded, isSortedByStars]);
+    }, [value, isResultLoaded, isSortedByStars, page]);
 
     return {packages, totalPagesAll};
 };

@@ -54,7 +54,11 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
               return <SearchCard key={ind} card={card}/>
             })}
           </div>
-          <Pagination paginationLength={paginationLength} setPageNumber={setPageNumber}/>
+          <Pagination
+            paginationLength={paginationLength}
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+          />
         </>
         }
         {!isLoading && packagesData.length === 0 && <p>No data</p>}

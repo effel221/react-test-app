@@ -8,3 +8,21 @@
     padding: 5px;
   }
 }
+
+.paginationBlockList {
+  display: flex;
+  list-style-type: none;
+
+  li {
+    padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-dark-blue;
+    }
+  }
+}
+
+.paginationBlockListItemActive {
+  color: $primary-red;
+}
