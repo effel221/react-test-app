@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import {SearchCardType} from "../components/BaseComponents/SearchCard/SearchCard";
 import {SearchCardTypeAll} from "../components/SearchPackagesResult/SearchPackagesResult";
 
@@ -45,6 +45,10 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
           getPackages(value, sort, page, setPageNumber).then(() => setIsResultLoaded(true))
       }
     }, [value, isResultLoaded, isSortedByStars, page]);
+
+    useEffect(()=> {
+        setPageNumber(1)
+    }, [value]);
 
     return {packages, totalPagesAll};
 };
