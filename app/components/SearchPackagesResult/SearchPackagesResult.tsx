@@ -30,7 +30,6 @@ export default memo(function SearchPackagesResult(): React.JSX.Element {
   const packagesData: [SearchCardType] = packagesDataAll['packages'];
   const totalPagesAll: number = packagesDataAll['totalPagesAll'];
   const paginationLength = totalPagesAll/5
-    console.log(totalPagesAll)
 
   const handleCheckboxChange = useCallback(() => {
     setIsSortedByStars(!isSortedByStars);
