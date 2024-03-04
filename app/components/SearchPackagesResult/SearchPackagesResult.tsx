@@ -13,22 +13,18 @@ import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
 import LoadingData from "../BaseComponents/LoadingData/LoadingData";
 import Pagination from "../BaseComponents/Pagination/Pagination";
+import {getTotalPagesFetched} from "../../stores/fetchCacheStore";
 
-export type SearchCardTypeAll = {
-    packages: [SearchCardType],
-    totalPagesAll: number
-}
 
 export default memo(function SearchPackagesResult(): React.JSX.Element {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ isSortedByStars, setIsSortedByStars ] = useState<boolean>(false);
   const [ pageNumber, setPageNumber ] = useState<number>(1);
   const currentValue: string = useSelector(getSearchValue);
+  const totalPagesAll: number = useSelector(getTotalPagesFetched);
   const debouncedValue: string = useDebounce(currentValue, 500);
-  const packagesDataAll: SearchCardTypeAll = usePackageSearch(debouncedValue,
+  const packagesData: [SearchCardType] = usePackageSearch(debouncedValue,
       setIsLoading, isSortedByStars, pageNumber, setPageNumber);
-  const packagesData: [SearchCardType] = packagesDataAll['packages'];
-  const totalPagesAll: number = packagesDataAll['totalPagesAll'];
   const paginationLength = totalPagesAll/5
 
   const handleCheckboxChange = useCallback(() => {

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {searchSlice} from "../stores/searchStore";
+import {fetchCacheSlice} from "../stores/fetchCacheStore";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            search: searchSlice.reducer
+            search: searchSlice.reducer,
+            fetchCache: fetchCacheSlice.reducer
         }
     })
 }
