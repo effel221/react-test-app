@@ -10,7 +10,6 @@ const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testEnvironment: "jsdom",
   globals: {
-    fetch: global.fetch,
     'ts-jest': {
       diagnostics: {
         exclude: ['**'],

@@ -4,8 +4,7 @@ import React from 'react'
 import {waitFor} from "@testing-library/dom";
 import {getPackages} from "../usePackageSearch.tsx";
 
-jest.useFakeTimers();
-jest.spyOn(global, 'setTimeout',null);
+
 
 const mockCardResponse = [{
     name: 'mockpack',
@@ -21,7 +20,11 @@ const mockResponse = {
 
 describe('test getPackages util',  () => {
     beforeEach(() => {
-        jest.spyOn(global, 'fetch').mockResolvedValue(mockResponse)
+        global.fetch = jest.fn(() =>
+          Promise.resolve({
+              json: () => Promise.resolve(mockResponse),
+          })
+        );
     });
 
     test('getPackages throw error in case of error', async () => {

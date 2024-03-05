@@ -13,7 +13,7 @@ describe('test debounce hook',  () => {
     });
 
     const callUseDebounceFirst = async (value, delay) => {
-        const initialProps = {value, delay}
+        const initialProps = {value, delay};
         const {result, rerender} = await renderHook(useDebounce, {initialProps});
         expect(result.current).toBe("")
         await waitFor(() => {
