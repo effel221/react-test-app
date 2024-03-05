@@ -13,12 +13,10 @@ describe('test debounce hook',  () => {
     });
 
     const callUseDebounceFirst = async (value, delay) => {
-        const initialProps = {value, delay};
-        const {result, rerender} = await renderHook(useDebounce, {initialProps});
+        const {result, rerender} = await renderHook((props)=>useDebounce(props || value, delay));
         expect(result.current).toBe("")
         await waitFor(() => {
-            expect(result.current.value).toBe("test value1");
-            expect(result.current.delay).toBe(500);
+            expect(result.current).toBe(value);
         })
         expect(setTimeout).toHaveBeenCalled();
         return {result, rerender}
@@ -30,10 +28,9 @@ describe('test debounce hook',  () => {
 
     test('render useDebounce twice with different props', async () => {
         const {result, rerender} = await callUseDebounceFirst("test value1", 500);
-        await rerender({value: "test value2", delay: 1000})
+        rerender("test value2")
         await waitFor(() => {
-            expect(result.current.value).toBe("test value2");
-            expect(result.current.delay).toBe(1000);
+            expect(result.current).toBe("test value2");
         })
         expect(setTimeout).toHaveBeenCalled();
     });

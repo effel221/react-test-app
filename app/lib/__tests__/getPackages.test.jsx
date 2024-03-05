@@ -6,7 +6,7 @@ import {getPackages} from "../usePackageSearch.tsx";
 
 
 
-const mockCardResponse = [{
+export const mockCardResponse = [{
     name: 'mockpack',
     description: 'mockpack description',
     rank: '23',

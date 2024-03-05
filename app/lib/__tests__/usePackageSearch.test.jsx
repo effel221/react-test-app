@@ -1,20 +1,30 @@
-import {useDebounce} from "../debounce";
-import {renderHook} from "@testing-library/react";
 import React from 'react'
+import {renderHook} from "@testing-library/react";
 import {waitFor} from "@testing-library/dom";
-import {usePackageSearch} from "../usePackageSearch.tsx";
+import * as PackageData from "../usePackageSearch";
+import {createWrapper} from "../renderWithProviders";
+import {makeStore} from "../store";
+
+
+
+const {usePackageSearch, getPackages} = PackageData;
 
 
 
 describe('test usePackageSearch hook',  () => {
+  test('return empty array if no value provided', async () => {
+    const store = makeStore({})
+    const wrapper = createWrapper(store)
+    const initialProps = {value: null, setIsLoading: jest.fn(), isSortedByStars: false,
+      page: 1, setPageNumber: jest.fn() }
+    const {result} = await renderHook(usePackageSearch, {
+      initialProps,
+      wrapper
+    });
 
-  test('render useDebounce once', async () => {
-    const initialProps = {value: "web", setIsLoading: jest.fn, }
-    const {result, rerender} = await renderHook(usePackageSearch, {initialProps});
     await waitFor(() => {
-      expect(result.current.value).toBe("test value1");
+      expect(result.current).toStrictEqual([]);
     })
   });
-
 })
 

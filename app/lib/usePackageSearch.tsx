@@ -52,8 +52,8 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean) => void,
           } else {
               setIsLoading(true)
               getPackages(value, sort, page, setPageNumber,
-                  searchCache, dispatch).then((responce) => {
-                  if (!responce) {
+                  searchCache, dispatch).then((response) => {
+                  if (!response) {
                       setPackages([]);
                       setIsLoading(false)
                       return;
@@ -64,7 +64,7 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean) => void,
       }, [value, isResultLoaded, isSortedByStars, page]);
 
     useEffect(() => {
-        setPageNumber(1)
+        setPageNumber && setPageNumber(1)
     }, [value]);
 
     return packages;
