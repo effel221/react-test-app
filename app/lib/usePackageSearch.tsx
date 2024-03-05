@@ -21,13 +21,14 @@ export const getPackages = async (value: string, sort: string,
             response = await fetch(`${mainUrl}${sortParam}${newPageParam}&api_key=${githubKey}`)
             setPageNumber(1)
         }
-        const totalPages = Number(response.headers.get('total'));
+        const totalPages = Number(response?.headers?.get('total')) || 1;
         dispatch(setTotalPagesFetched(totalPages));
         const packagesData = await response.json();
         searchCacheLocal[`${value}-${sort}-${page}`] = packagesData;
         dispatch(setSearchCache(searchCacheLocal));
+        return searchCacheLocal;
     } catch (error: Error) {
-        console.error(error);
+        console.log(error);
     }
 }
 
@@ -39,18 +40,25 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
     const dispatch = useAppDispatch();
 
     useEffect(()=> {
-      setIsResultLoaded(false)
-      if (!value.length) return setPackages([])
-      const sort = isSortedByStars ? 'stars' : '';
-      const cacheKey = `${value}-${sort}-${page}`;
-      if (searchCache[cacheKey]) {
-          setPackages(searchCache[cacheKey] || []);
-          setIsLoading(false)
-      } else {
-          setIsLoading(true)
-          getPackages(value, sort, page, setPageNumber,
-              searchCache, dispatch).then(() => setIsResultLoaded(true))
-      }
+        setIsResultLoaded(false)
+        if (!value.length) return setPackages([])
+        const sort = isSortedByStars ? 'stars' : '';
+        const cacheKey = `${value}-${sort}-${page}`;
+        if (searchCache[cacheKey]) {
+            setPackages(searchCache[cacheKey] || []);
+            setIsLoading(false)
+            } else {
+                setIsLoading(true)
+                getPackages(value, sort, page, setPageNumber,
+                    searchCache, dispatch).then((responce) => {
+                    if (!responce) {
+                        setPackages([]);
+                        setIsLoading(false)
+                        return;
+                    }
+                  setIsResultLoaded(true)
+                });
+            }
     }, [value, isResultLoaded, isSortedByStars, page]);
 
     useEffect(()=> {
