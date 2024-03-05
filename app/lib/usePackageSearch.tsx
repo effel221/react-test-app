@@ -37,6 +37,7 @@ export const usePackageSearch = (value: string, setIsLoading: (boolean)=>void,
     const [isResultLoaded, setIsResultLoaded ] = useState<boolean>(false);
     const searchCache: Object = useSelector(getFetchCache);
     const dispatch = useAppDispatch();
+
     useEffect(()=> {
       setIsResultLoaded(false)
       if (!value.length) return setPackages([])
