@@ -1,9 +1,11 @@
 //import  components
 import LeftNav from "../LeftNav/LeftNav";
+import StoreProvider from "../../StoreProvider";
 
 // import styles
 import styles from "./MainContent.module.scss";
-import StoreProvider from "../../StoreProvider";
+
+
 
 export default function MainContent({children}: React.ReactNode): React.JSX.Element {
   return (

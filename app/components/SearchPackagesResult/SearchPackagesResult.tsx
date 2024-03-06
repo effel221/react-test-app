@@ -2,6 +2,8 @@
 //import  components
 import React, {memo, useCallback, useState} from "react";
 import SearchCard, {SearchCardType} from "../BaseComponents/SearchCard/SearchCard";
+import LoadingData from "../BaseComponents/LoadingData/LoadingData";
+import Pagination from "../BaseComponents/Pagination/Pagination";
 
 // import styles
 import styles from "./SearchPackagesResult.module.scss";
@@ -11,8 +13,6 @@ import {getSearchValue} from "../../stores/searchStore";
 import {useSelector} from "react-redux";
 import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
-import LoadingData from "../BaseComponents/LoadingData/LoadingData";
-import Pagination from "../BaseComponents/Pagination/Pagination";
 import {getTotalPagesFetched} from "../../stores/fetchCacheStore";
 
 

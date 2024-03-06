@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {SearchCardType} from "../components/BaseComponents/SearchCard/SearchCard";
 import {useSelector} from "react-redux";
-import {getFetchCache, setSearchCache, setTotalPagesFetched} from "../stores/fetchCacheStore";
+import {getFetchCache} from "../stores/fetchCacheStore";
 import {useAppDispatch} from "./hooks";
 import {getPackages} from "./getPackages";
 

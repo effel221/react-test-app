@@ -1,8 +1,4 @@
-import {useEffect, useState} from "react";
-import {SearchCardType} from "../components/BaseComponents/SearchCard/SearchCard";
-import {useSelector} from "react-redux";
-import {getFetchCache, setSearchCache, setTotalPagesFetched} from "../stores/fetchCacheStore";
-import {useAppDispatch} from "./hooks";
+import {setSearchCache, setTotalPagesFetched} from "../stores/fetchCacheStore";
 
 const url = 'https://libraries.io/api/search'
 const githubKey = 'adea9f496220f5bf0a57a2fc91bfe40b'

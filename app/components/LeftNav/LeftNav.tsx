@@ -1,8 +1,10 @@
 "use client"
 //import  components
+import React from "react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
 
+//import hooks
+import {usePathname} from "next/navigation";
 
 // import styles
 import styles from "./LeftNav.module.scss";

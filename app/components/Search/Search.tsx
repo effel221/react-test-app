@@ -1,6 +1,6 @@
 "use client"
 //import  components
-import React, {createRef, LegacyRef, useState} from "react";
+import React from "react";
 import {useRef} from "react";
 import {getSearchValue, setSearchValue} from "../../stores/searchStore";
 

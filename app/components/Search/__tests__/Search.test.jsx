@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from "@testing-library/react";
+import {fireEvent, screen} from "@testing-library/react";
 import Search from "../Search";
 import {renderWithProviders} from "../../../lib/renderWithProviders";
 
