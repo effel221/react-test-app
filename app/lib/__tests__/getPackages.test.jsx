@@ -1,8 +1,7 @@
-
-import {renderHook} from "@testing-library/react";
 import React from 'react'
 import {waitFor} from "@testing-library/dom";
-import {getPackages} from "../usePackageSearch.tsx";
+import {getPackages} from "../getPackages";
+
 
 
 

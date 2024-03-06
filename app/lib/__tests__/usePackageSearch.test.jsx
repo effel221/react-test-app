@@ -7,7 +7,7 @@ import {makeStore} from "../store";
 
 
 
-const {usePackageSearch, getPackages} = PackageData;
+const {usePackageSearch} = PackageData;
 
 
 
