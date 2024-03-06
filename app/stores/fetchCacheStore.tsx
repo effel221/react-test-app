@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AppState } from "../lib/store";
 
-// ## SearchState Interface
+// ## FetchCacheState Interface
 export interface FetchCacheState {
     searchCache: Object;
     totalPagesFetched: number;
 }
 
-// ## Define the initial state of Cart State
+// ## Define the initial state of Fetch Cache
 const initialState: FetchCacheState = {
     searchCache: {},
     totalPagesFetched: 100
