@@ -11,6 +11,8 @@ import styles from "./SearchPackagesResult.module.scss";
 // redux store
 import {getSearchValue} from "../../stores/searchStore";
 import {useSelector} from "react-redux";
+
+//import hooks
 import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
 import {getTotalPagesFetched} from "../../stores/fetchCacheStore";
