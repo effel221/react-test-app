@@ -1,16 +1,10 @@
 import React from 'react'
 import {waitFor} from "@testing-library/dom";
 import {getPackages} from "../getPackages";
+import {mockCardResponse} from "../mockData.jsx";
 
 
 
-
-export const mockCardResponse = [{
-    name: 'mockpack',
-    description: 'mockpack description',
-    rank: '23',
-    stars: '17'
-}];
 
 const mockResponse = {
     headers: { get: () => ({total: 25})},
@@ -19,6 +13,7 @@ const mockResponse = {
 
 describe('test getPackages util',  () => {
     beforeEach(() => {
+        jest.clearAllMocks();
         global.fetch = jest.fn(() =>
           Promise.resolve({
               json: () => Promise.resolve(mockResponse),
@@ -44,7 +39,7 @@ describe('test getPackages util',  () => {
     });
 
     afterEach(() => {
-        jest.restoreAllMocks();
+        jest.clearAllMocks();
     });
 })
 
