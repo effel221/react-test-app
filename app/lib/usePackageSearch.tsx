@@ -4,13 +4,18 @@ import {useSelector} from "react-redux";
 import {getFetchCache} from "../stores/fetchCacheStore";
 import {useAppDispatch} from "./hooks";
 import {getPackages} from "./getPackages";
+import {RootState} from "./store";
 
-export const usePackageSearch = (value: string, setIsLoading: (boolean) => void,
+export interface SearchCacheType {
+    [key: string]: [SearchCardType]
+}
+
+export const usePackageSearch = (value: string, setIsLoading: (T:boolean) => void,
   isSortedByStars: boolean, page: number,
-  setPageNumber: (T) => void): [SearchCardType] => {
+  setPageNumber: (T:number) => void): [SearchCardType] => {
       const [packages, setPackages] = useState<[SearchCardType]>([]);
       const [isResultLoaded, setIsResultLoaded] = useState<boolean>(false);
-      const searchCache: Object = useSelector(getFetchCache);
+      const searchCache: SearchCacheType = useSelector<RootState, SearchCacheType>(getFetchCache);
       const dispatch = useAppDispatch();
 
       useEffect(() => {

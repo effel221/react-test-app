@@ -16,15 +16,16 @@ import {useSelector} from "react-redux";
 import {useDebounce} from "../../lib/debounce";
 import {usePackageSearch} from "../../lib/usePackageSearch";
 import {getTotalPagesFetched} from "../../stores/fetchCacheStore";
+import {RootState} from "../../lib/store";
 
 
 export default memo(function SearchPackagesResult(): React.JSX.Element {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ isSortedByStars, setIsSortedByStars ] = useState<boolean>(false);
   const [ pageNumber, setPageNumber ] = useState<number>(1);
-  const currentValue: string = useSelector(getSearchValue);
-  const totalPagesAll: number = useSelector(getTotalPagesFetched);
-  const debouncedValue: string = useDebounce(currentValue, 500);
+  const currentValue: string = useSelector<RootState, string>(getSearchValue);
+  const totalPagesAll: number = useSelector<RootState, number>(getTotalPagesFetched);
+  const debouncedValue: string = useDebounce<string, number>(currentValue, 500);
   const packagesData: [SearchCardType] = usePackageSearch(debouncedValue,
       setIsLoading, isSortedByStars, pageNumber, setPageNumber);
   const paginationLength = totalPagesAll/5

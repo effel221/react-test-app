@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { AppState } from "../lib/store";
+import {SearchCacheType} from "../lib/usePackageSearch";
 
 // ## FetchCacheState Interface
 export interface FetchCacheState {
-    searchCache: Object;
+    searchCache: SearchCacheType;
     totalPagesFetched: number;
 }
 
@@ -17,7 +18,7 @@ export const fetchCacheSlice = createSlice({
     name: "fetchCache",
     initialState,
     reducers: {
-        setSearchCache: (state: FetchCacheState, action: PayloadAction<string>) => {
+        setSearchCache: (state: FetchCacheState, action: PayloadAction<SearchCacheType>) => {
             state.searchCache = action.payload;
         },
         setTotalPagesFetched: (state: FetchCacheState, action: PayloadAction<number>) => {

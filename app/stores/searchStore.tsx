@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { AppState } from "../lib/store";
+import {AppDispatch, AppState} from "../lib/store";
 
 // ## SearchState Interface
 export interface SearchState {
@@ -21,7 +21,7 @@ export const searchSlice = createSlice({
     }
 });
 
-export const { setSearchValue } = searchSlice.actions;
+export const { setSearchValue }: AppDispatch = searchSlice.actions;
 
 export const getSearchValue = (state: AppState) => state?.search?.searchValue;
 
